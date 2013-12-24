@@ -1,30 +1,34 @@
 var request = require('request');
+var connect = require('connect');
+var url = require('url');
 
 /**
  * InstagramSubscriber
  * Helps with Instagram Subscriptions
  */
-function SubscriptionManager (parent, client_id, client_secret, callback_url) {
-  this.client_id      = client_id;
-  this.client_secret  = client_secret;
-  this.callback_url   = callback_url;
-
-  this.subscriptions = [];
+function SubscriptionManager (params) {
+  this.parent = params.parent;
+  this.server = params.server;
+  this.client_id      = params.client_id;
+  this.client_secret  = params.client_secret;
+  this.callback_url   = params.callback_url;
+  var self = this;
 
   this.subscribe_handler = function (error, resp, body) {
     if (resp.statusCode === 200) {
-      parent.emit('subscribe', resp, body);
+      self.parent.emit('subscribe', resp, body);
     }
     else {
-      parent.emit('subscribe/error', error, resp, body);
+      self.parent.emit('subscribe/error', error, resp, body);
     }
   };
+
   this.unsubscribe_handler = function (error, resp, body) {
     if (resp.statusCode === 200) {
-      parent.emit('unsubscribe', resp, body);
+      self.parent.emit('unsubscribe', resp, body);
     }
     else {
-      parent.emit('unsubscribe/error', error, resp, body);
+      self.parent.emit('unsubscribe/error', error, resp, body);
     }
   };
 }
@@ -137,4 +141,4 @@ SubscriptionManager.prototype.unsubscribe = function (id) {
 };
 
 // ...
-module.exports = InstagramSubscriber;
+module.exports = SubscriptionManager;

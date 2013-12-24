@@ -100,7 +100,6 @@ function Stream (server, opts) {
       self.emit('new', resp, body);
     }
     catch (err) {
-      console.log(err);
       console.log('JSON object was not parsed');
       self.emit('error', error, resp, body);
     }
