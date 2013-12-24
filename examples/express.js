@@ -1,6 +1,7 @@
 var app     = require('express')();
 var server  = require('http').createServer(app);
-var InstagramStream = require('../libs/InstagramStream.js')(server);
+var InstagramStream = require('../libs/InstagramStream.js');
+var stream = InstagramStream(server);
 
 server.listen(5000);
 

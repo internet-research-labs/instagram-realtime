@@ -1,7 +1,8 @@
 var events  = require('events');
 var util    = require('util');
 var connect = require('connect');
-var static = require('./static.js');
+var attach = require('./attach.js');
+var url = require('url');
 
 util.inherits(InstagramStream, events.EventEmitter);
 
@@ -16,9 +17,23 @@ function InstagramStream (server, opts) {
   }
 
   // Add 
-  static.call(this, server);
+  var self = this;
+  ~function () {
+    var pathname = '/callback';
+    attach.call(server, pathname, __get, __post); 
 
-  // This block adds the subscription and new media responses
+    function __get (req, resp) {
+      var hub_challenge = url.parse(req.url, true).query['hub.challenge'];
+      resp.setHeader('Content-Type', 'text/plain');
+      resp.end(hub_challenge ? hub_challenge : 'vvhatever');
+    }
+
+    function __post (req, resp) {
+      var body = JSON.parse(resp.body);
+      console.log(body);
+      resp.end('vvhatever');
+    }
+  }();
 }
 
 InstagramStream.prototype.subscribe = function () {
