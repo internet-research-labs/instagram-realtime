@@ -4,12 +4,15 @@
   "description": "Event-driven, Object-oriented Instagram API Wrapper",
   "main": "libs/instagram-realtime.js",
   "dependencies": {
-    "express": "3.x.x",
+    "connect" : "x.x.x",
     "request": "2.x.x",
     "colors": "0.x.x"
   },
+  "devDependencies": {
+    "express": "3.x.x"
+  },
   "scripts": {
-    "test": "node index.js"
+    "test": "node examples/express.js"
   },
   "engines": {
     "node": "0.8.x"
