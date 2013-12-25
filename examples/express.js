@@ -3,14 +3,12 @@ console.log('');
 console.log('');
 console.log('started: ' + new Date());
 
-var app = require('express')();
-var connect = require('connect');
+var app     = require('express')();
 var colors  = require('colors');
-
-var server  = require('http').createServer(app);
+var server  = require('http').createServer(app).listen(5000);
 
 var InstagramStream = require('../libs/InstagramStream.js');
-var secrets = require('../secrets.json');
+var secrets = require('./secrets.json');
 
 
 var stream = InstagramStream(
@@ -22,8 +20,6 @@ var stream = InstagramStream(
     callback_path : 'callback'
   }
 );
-
-server.listen(5000);
 
 stream.on('unsubscribe', function (req, resp) {
   console.log('unsubscribe'.green);
@@ -43,7 +39,6 @@ stream.on('subscribe/error', function (error, req, resp) {
 });
 
 stream.on('new', function (req, resp) {
-  console.log(req.body);
   console.log('rainbow'.rainbow);
 });
 

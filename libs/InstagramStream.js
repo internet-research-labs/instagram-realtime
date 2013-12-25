@@ -76,18 +76,19 @@ function InstagramStream (server, opts) {
 
     var chain = connect();
 
-    // TODO: Add media requests and subscription verifications ++ event emitters
+    chain.use(connect.bodyParser());
+
     chain.use(function (req, resp, next) {
       var pathname = url.parse(req.url).pathname;
-      // TODO: Make it about matching the URL!
       if (req.method === 'GET' && pathname === '/' + self.callback_path) {
         var hub_challenge = url.parse(req.url, true).query['hub.challenge'];
-        resp.writeHeader('Content-Type: text/plain; charset=utf-8');
+        resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
         resp.end(hub_challenge ? hub_challenge : '🍕');
       }
       else if (req.method === 'POST' && pathname === '/' + self.callback_path) {
-        resp.writeHeader('Content-Type: text/plain; charset=utf-8');
+        resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
         resp.end('🍕');
+        route_traffic(req.body, req);
       }
       else {
         next();
@@ -126,10 +127,63 @@ function InstagramStream (server, opts) {
   this.unsubscribe = function (id) {
     _sub.unsubscribe('all');
   }
+  /**
+   * Request a Media Search from Instagram Based on an HTTP-Request
+   * ~~~
+   * @param {!Request Body} body an HTTP-request from the InstagramAPI containing
+   * object-id and subscription-id information. This can determine which type of
+   * subscription was sent, and what its purpose was.
+   */
+  function route_traffic (body) {
+    for (var k = 0; k < body.length; k++) {
+      route_individual_media_response(body[k]);
+    }
+  }
+
+  function route_individual_media_response (result) {
+    var sub_type = result.object;
+    var sub_id = result.subscription_id;
+    var obj_id = result.object_id;
+
+    if (!(sub_id && obj_id)) {
+      console.log('bad result... this seems like an Instagram API problem');
+      console.log('sub_id = ' + sub_id);
+      console.log('obj_id = ' + obj_id);
+    }
+
+    switch (sub_type) {
+    case 'user':
+      console.log('routing user-media traffic');
+      console.log('NOTE: this is *not* implemented');
+      _fetch.get_user();
+      break;
+
+    case 'tag':
+      console.log('routing tag-media traffic');
+      _fetch.get_tag(obj_id);
+      break;
+
+    case 'location':
+      console.log('routing location-media traffic');
+      _fetch.get_location(obj_id);
+      break;
+
+    case 'geography':
+      console.log('routing geography-media traffic');
+      console.log('NOTE: this is *not* implemented');
+      _fetch.get_geography(0, 0, 1000);
+      break;
+
+    default:
+      console.log('bad media update');
+      return;
+    }
+  }
 }
 
 // LISTEN = CONSTRUCTOR
 InstagramStream.prototype.listen = InstagramStream;
+
 
 // Exports
 module.exports = InstagramStream;

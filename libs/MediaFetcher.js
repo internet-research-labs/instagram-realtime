@@ -4,12 +4,29 @@ var request = require('request');
  * MediaFetcher
  * Helps with pulling new media
  */
-function MediaFetcher (parent, client_id, client_secret, callback_url) {
-  this.client_id      = client_id;
-  this.client_secret  = client_secret;
-  this.callback_url   = callback_url;
+function MediaFetcher (params) {
+  var self = this;
+  self.parent = params.parent;
+  self.server = params.server;
+  self.client_id      = params.client_id;
+  self.client_secret  = params.client_secret;
+  self.callback_url   = params.callback_url;
+
+  // Request Media Handler
+  self.request_media_handler = function (error, resp, body) {
+    if (resp.statusCode === 200) {
+      self.parent.emit('new', resp, body);
+    }
+    else {
+      self.parent.emit('new/error', resp, body);
+    }
+  };
 }
 
+/**
+ * Get New Media Created by a User
+ * Sends an
+ */
 MediaFetcher.prototype.get_user = function (id) {
   if (typeof id !== 'string') {
     console.log('User search must have id\'s');
@@ -22,7 +39,7 @@ MediaFetcher.prototype.get_user = function (id) {
 
   console.log(url);
 
-  request.get(url, request_media_handler);
+  request.get(url, self.request_media_handler);
 };
 
 MediaFetcher.prototype.get_tag = function (tag) {
@@ -33,7 +50,7 @@ MediaFetcher.prototype.get_tag = function (tag) {
 
   console.log(url);
 
-  request.get(url, request_media_handler);
+  request.get(url, this.request_media_handler);
 };
 
 MediaFetcher.prototype.get_location = function (id) {
@@ -44,7 +61,7 @@ MediaFetcher.prototype.get_location = function (id) {
 
   console.log(url);
 
-  request.get(url, request_media_handler);
+  request.get(url, self.request_media_handler);
 };
 
 MediaFetcher.prototype.get_geography = function (lat, lng, rad) {
@@ -56,10 +73,7 @@ MediaFetcher.prototype.get_geography = function (lat, lng, rad) {
 
   console.log(url);
 
-  request.get(url, request_media_handler);
+  request.get(url, self.request_media_handler);
 };
-
-function request_media_handler (error, resp, body) {
-} 
 
 module.exports = MediaFetcher;

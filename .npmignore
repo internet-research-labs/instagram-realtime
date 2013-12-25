@@ -15,5 +15,3 @@ npm-debug.log
 node_modules
 
 Procfile
-secrets.json
-*.swp
