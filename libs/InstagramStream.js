@@ -71,8 +71,6 @@ function InstagramStream (server, opts) {
   });
 
   // Route '/:callback' -> custom handlers
-
-  // Route '/:callback' -> custom handlers
   ~function () {
     var listeners = server.listeners('request');
 
@@ -83,8 +81,9 @@ function InstagramStream (server, opts) {
       var pathname = url.parse(req.url).pathname;
       // TODO: Make it about matching the URL!
       if (req.method === 'GET' && pathname === '/' + self.callback_path) {
+        var hub_challenge = url.parse(req.url, true).query['hub.challenge'];
         resp.writeHeader('Content-Type: text/plain; charset=utf-8');
-        resp.end('🍕');
+        resp.end(hub_challenge ? hub_challenge : '🍕');
       }
       else if (req.method === 'POST' && pathname === '/' + self.callback_path) {
         resp.writeHeader('Content-Type: text/plain; charset=utf-8');
