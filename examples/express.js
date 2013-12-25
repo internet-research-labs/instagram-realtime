@@ -26,7 +26,7 @@ stream.on('unsubscribe', function (req, resp) {
   stream.subscribe({ tag : 'yolo' });
 });
 
-stream.on('unsubscribe/error', function (error, req, resp) {
+stream.on('unsubscribe/error', function (error, body) {
   console.log('unsubscribe/error'.red);
 });
 
@@ -36,6 +36,7 @@ stream.on('subscribe', function (req, resp) {
 
 stream.on('subscribe/error', function (error, req, resp) {
   console.log('subscribe/error'.red);
+  console.log(resp);
 });
 
 stream.on('new', function (req, resp) {

@@ -25,6 +25,11 @@ stream.on('new', function (resp, body) {
 stream.unsubscribe_all();
 ```
 
+# TODO
+
+1. Adjust function callbacks
+2. Update docs
+
 # License
 
 MIT
