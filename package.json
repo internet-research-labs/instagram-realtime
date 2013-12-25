@@ -6,10 +6,11 @@
   "dependencies": {
     "connect": "x.x.x",
     "request": "2.x.x",
-    "colors": "0.x.x",
+    "colors": "0.x.x"
+  },
+  "devDependencies": {
     "express": "3.x.x"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node examples/express.js"
   },
@@ -28,6 +29,5 @@
   "author": "Matt Razorblade Hammerstadt <matt@planwork.us>",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "gitHead": "bed8113f972785860515c1e384b17d108604a531",
-  "subdomain": "iriririr"
+  "gitHead": "bed8113f972785860515c1e384b17d108604a531"
 }
