@@ -3,7 +3,7 @@ var connect = require('connect');
 var url = require('url');
 
 /**
- * InstagramSubscriber
+ * SubscriptionManager
  * Helps with Instagram Subscriptions
  */
 function SubscriptionManager (params) {

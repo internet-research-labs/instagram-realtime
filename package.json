@@ -1,17 +1,23 @@
 {
   "name": "instagram-realtime",
-  "version": "0.0.0-43",
+  "version": "0.0.0-56",
   "description": "Event-driven, Object-oriented Instagram API Wrapper",
   "main": "libs/InstagramStream.js",
   "dependencies": {
     "connect": "x.x.x",
     "request": "2.x.x",
     "colors": "0.x.x",
-    "express": "3.x.x"
+    "socket.io": "0.9.x"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "express": "3.x.x",
+    "socket.io": "0.9.x"
+  },
   "scripts": {
-    "start": "node examples/express.js"
+    "start": "node examples/socket.io.js",
+    "example-express": "node examples/express.js",
+    "example-http": "node examples/http.js",
+    "example-socket.io": "node examples/socket.io.js"
   },
   "engines": {
     "node": "0.8.x"
@@ -28,6 +34,5 @@
   "author": "Matt Razorblade Hammerstadt <matt@planwork.us>",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "gitHead": "bed8113f972785860515c1e384b17d108604a531",
   "subdomain": "iriririr"
 }

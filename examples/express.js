@@ -1,15 +1,12 @@
-console.log('');
-console.log('');
-console.log('');
-console.log('started: ' + new Date());
-
 var app     = require('express')();
 var colors  = require('colors');
 var server  = require('http').createServer(app).listen(5000);
 
+console.log('instagram-realtime: '.rainbow + 'express example');
+console.log('@: '.blue + new Date());
+
 var InstagramStream = require('../libs/InstagramStream.js');
 var secrets = require('./secrets.json');
-
 
 var stream = InstagramStream(
   server,

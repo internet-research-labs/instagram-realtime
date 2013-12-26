@@ -4,7 +4,6 @@ var events  = require('events');
 var util    = require('util');
 var url     = require('url');
 // Internal dependencies
-var route = require('./route.js');
 var SubscriptionManager = require('./SubscriptionManager.js');
 var MediaFetcher        = require('./MediaFetcher.js');
 
