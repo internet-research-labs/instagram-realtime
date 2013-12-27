@@ -16,6 +16,9 @@ function MediaFetcher (params) {
   self.request_media_handler = function (error, resp, body) {
     if (resp.statusCode === 200) {
       self.parent.emit('new', resp, body);
+      self.parent.last.response = resp;
+      self.parent.last.body     = body;
+      self.parent.last_body     = body;
     }
     else {
       self.parent.emit('new/error', resp, body);
@@ -39,7 +42,7 @@ MediaFetcher.prototype.get_user = function (id) {
 
   console.log(url);
 
-  request.get(url, self.request_media_handler);
+  request.get(url, this.request_media_handler);
 };
 
 MediaFetcher.prototype.get_tag = function (tag) {
@@ -47,8 +50,6 @@ MediaFetcher.prototype.get_tag = function (tag) {
   url += '/tags/' + tag;
   url += '/media/recent';
   url += '?client_id='  + this.client_id;
-
-  console.log(url);
 
   request.get(url, this.request_media_handler);
 };
@@ -61,7 +62,7 @@ MediaFetcher.prototype.get_location = function (id) {
 
   console.log(url);
 
-  request.get(url, self.request_media_handler);
+  request.get(url, this.request_media_handler);
 };
 
 MediaFetcher.prototype.get_geography = function (lat, lng, rad) {

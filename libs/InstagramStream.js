@@ -30,6 +30,8 @@ function InstagramStream (server, opts) {
     opts    = server;
   }
 
+  opts = opts || {};
+
   // Warn user about invalid options
   if (!opts.client_id) {
     console.log('Invalid "client_id"'.yellow);
@@ -50,6 +52,11 @@ function InstagramStream (server, opts) {
   this.callback_url   = opts.url + '/' + opts.callback_path;
   this.url            = opts.url;
   this.callback_path  = opts.callback_path;
+
+  this.last = {};
+  this.last.response  = undefined;
+  this.last.body      = undefined;
+  this.last_body      = undefined;    // TODO: Remove this
 
   // Defaults
   this.callback_path = this.callback_path ? this.callback_path : 'callback';
@@ -158,12 +165,10 @@ function InstagramStream (server, opts) {
       break;
 
     case 'tag':
-      console.log('routing tag-media traffic');
       _fetch.get_tag(obj_id);
       break;
 
     case 'location':
-      console.log('routing location-media traffic');
       _fetch.get_location(obj_id);
       break;
 
