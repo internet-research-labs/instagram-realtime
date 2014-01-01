@@ -43,6 +43,39 @@ app.get('/', function (req, resp) {
 stream.unsubscribe('all');
 ```
 
+# How-to
+
+## Standard Events
+
+There are 3 events:
+1. `subscribe`
+2. `unsubscribe`
+3. `new`
+
+Their callback is:
+```js
+function (req, resp) { /* code */ }
+```
+
+1. `req`: a request object returned by the `http` package
+2. `resp`: a response object used by the `http` package
+
+## Error Events
+
+There are 3 error events:
+1. `subscribe/error`
+2. `unsubscribe/error`
+3. `new/error`
+
+Their callback is:
+```js
+function (error, req, resp) { /* code */ }
+```
+
+1. `error`: an error string returned by the `request` package
+2. `req`: a request object returned by the `http` package
+3. `resp`: a response object used by the `http` package
+
 # TODO
 
 1. Adjust function callbacks
