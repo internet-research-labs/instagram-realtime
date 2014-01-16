@@ -6,6 +6,13 @@ That is, program instagram-related things, using an event-driven framework.
 Note that this adds middleware, which handles the Instagram API's subscription
 verification.
 
+## WARNING
+
+THIS IS BETA. Expect a full release in March 2014. Thx. Additionally, see examples of it:
+
+* [SVV.IM](http://svv.im)
+* [WEATHER VANE](http://weather-vane.jit.su)
+
 ## Minimal Example
 
 ```js
