@@ -13,7 +13,7 @@ var app     = require('express')();
 var colors  = require('colors');
 var server  = require('http').createServer(app).listen(process.env.PORT || 5000);
 
-var InstagramStream = require('../libs/InstagramStream.js');
+var InstagramStream = require('instagram-realtime');
 var secrets = require('./secrets.json');
 
 var stream = InstagramStream(
