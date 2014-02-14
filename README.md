@@ -13,7 +13,7 @@ var app     = require('express')();
 var colors  = require('colors');
 var server  = require('http').createServer(app).listen(process.env.PORT || 5000);
 
-var InstagramStream = require('../libs/InstagramStream.js');
+var InstagramStream = require('instagram-realtime');
 var secrets = require('./secrets.json');
 
 var stream = InstagramStream(
@@ -43,40 +43,73 @@ app.get('/', function (req, resp) {
 stream.unsubscribe('all');
 ```
 
-# How-to
+## Methods
 
-## Standard Events
+Brief description of functions
 
-There are 3 events:
-1. `subscribe`
-2. `unsubscribe`
-3. `new`
+### subscribe
 
-Their callback is:
+Subscribe to a hashtag:
+
 ```js
-function (req, resp) { /* code */ }
+stream.subscribe({ tag : 'yolo' });
 ```
 
-1. `req`: a request object returned by the `http` package
-2. `resp`: a response object used by the `http` package
+Subscribe to a geographic location:
 
-## Error Events
-
-There are 3 error events:
-1. `subscribe/error`
-2. `unsubscribe/error`
-3. `new/error`
-
-Their callback is:
 ```js
-function (error, req, resp) { /* code */ }
+stream.subscribe({ lat:35.657872, lng:139.70232', radius:1000 });
 ```
 
-1. `error`: an error string returned by the `request` package
-2. `req`: a request object returned by the `http` package
-3. `resp`: a response object used by the `http` package
+Subscribe to a location by ID:
 
-# TODO
+```js
+stream.subscribe({ location : 2345 });
+```
+
+Subscribe to *all* users registered with the app:
+
+```js
+stream.subscribe({ user : true });
+```
+
+### unsubscribe
+
+Unsubscribe from a stream:
+
+```js
+stream.unsubscribe();
+```
+
+### on
+
+Register a trigger for unsubscription:
+
+```js
+stream.on('unsubscribe', function (response, body) {
+}
+stream.on('unsubscribe/error', function (error, response, body) {
+}
+```
+
+Register a trigger for subscription:
+
+```js
+stream.on('subscribe', function (response, body) {
+}
+stream.on('subscribe/error', function (error, response, body) {
+}
+```
+
+Register a trigger for new media:
+```js
+stream.on('new', function (response, body) {
+}
+stream.on('new/error', function (error, response, body) {
+}
+```
+
+## TODO
 
 1. Adjust function callbacks
 2. Update docs
