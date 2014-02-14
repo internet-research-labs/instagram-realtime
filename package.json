@@ -9,6 +9,7 @@
     "colors": "0.x.x"
   },
   "devDependencies": {
+    "mocha": "1.x.x",
     "express": "3.x.x",
     "socket.io": "0.9.x"
   },
@@ -16,7 +17,8 @@
     "start": "node examples/socket.io.js",
     "example-express": "node examples/express.js",
     "example-http": "node examples/http.js",
-    "example-socket.io": "node examples/socket.io.js"
+    "example-socket.io": "node examples/socket.io.js",
+    "test": "./node_modules/.bin/mocha -R spec"
   },
   "engines": {
     "node": "0.8.x"
