@@ -6,13 +6,6 @@ That is, program instagram-related things, using an event-driven framework.
 Note that this adds middleware, which handles the Instagram API's subscription
 verification.
 
-## WARNING
-
-THIS IS BETA. Expect a full release in March 2014. Thx. Additionally, see examples of it:
-
-* [SVV.IM](http://svv.im)
-* [WEATHER VANE](http://weather-vane.jit.su)
-
 ## Minimal Example
 
 ```js
@@ -83,7 +76,68 @@ function (error, req, resp) { /* code */ }
 2. `req`: a request object returned by the `http` package
 3. `resp`: a response object used by the `http` package
 
-# TODO
+## Methods
+
+Brief description of functions
+
+### subscribe
+
+Subscribe to a hashtag:
+```stream.subscribe({ tag : 'yolo' });```
+
+Subscribe to a geographic location:
+```stream.subscribe({ lat:35.657872, lng:139.70232', radius:1000 });```
+
+Subscribe to a location by ID:
+```stream.subscribe({ location : 2345 });```
+
+Subscribe to *all* users registered with the app:
+```stream.subscribe({ user : true });```
+
+### unsubscribe
+
+Unsubscribe from a stream:
+```stream.unsubscribe();```
+
+### on
+
+Register a trigger for unsubscription:
+```js
+// On unsubscribe success
+stream.on('unsubscribe', function (response, body) {
+  // ...
+}
+// On unsubscribe error
+stream.on('unsubscribe/error', function (error, response, body) {
+  // ...
+}
+```
+
+Register a trigger for subscription:
+```js
+// On subscribe success
+stream.on('subscribe', function (response, body) {
+  // ...
+}
+// On subscribe error
+stream.on('subscribe/error', function (error, response, body) {
+  // ...
+}
+```
+
+Register a trigger for new media:
+```js
+// On new media received success
+stream.on('new', function (response, body) {
+  // ...
+}
+// On new media error
+stream.on('new/error', function (error, response, body) {
+  // ...
+}
+```
+
+## TODO
 
 1. Adjust function callbacks
 2. Update docs

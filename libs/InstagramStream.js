@@ -131,7 +131,8 @@ function InstagramStream (server, opts) {
   };
 
   this.unsubscribe = function (id) {
-    _sub.unsubscribe('all');
+    id = id || 'all';
+    _sub.unsubscribe(id);
   }
   /**
    * Request a Media Search from Instagram Based on an HTTP-Request
