@@ -65,16 +65,13 @@ MediaFetcher.prototype.get_location = function (id) {
   request.get(url, this.request_media_handler);
 };
 
-MediaFetcher.prototype.get_geography = function (lat, lng, rad) {
+MediaFetcher.prototype.get_geography = function (id) {
   var url = 'https://api.instagram.com/v1';
-  url += '/media/search';
-  url += '?lat=' + lat;
-  url += '&lng=' + lng;
-  url += '&distance=' + rad;
+  url += '/geographies/' + id;
+  url += '/media/recent';
+  url += '?client_id='  + this.client_id;
 
-  console.log(url);
-
-  request.get(url, self.request_media_handler);
+  request.get(url, this.request_media_handler);
 };
 
 module.exports = MediaFetcher;

@@ -174,9 +174,7 @@ function InstagramStream (server, opts) {
       break;
 
     case 'geography':
-      console.log('routing geography-media traffic');
-      console.log('NOTE: this is *not* implemented');
-      _fetch.get_geography(0, 0, 1000);
+      _fetch.get_geography(obj_id);
       break;
 
     default:
