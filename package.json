@@ -5,12 +5,12 @@
   "main": "libs/InstagramStream.js",
   "dependencies": {
     "connect": "x.x.x",
-    "request": "2.x.x",
-    "colors": "0.x.x"
+    "request": "2.x.x"
   },
   "devDependencies": {
     "mocha": "1.x.x",
     "express": "3.x.x",
+    "colors": "0.x.x",
     "socket.io": "0.9.x"
   },
   "scripts": {
