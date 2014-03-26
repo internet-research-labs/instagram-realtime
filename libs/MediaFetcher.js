@@ -40,8 +40,6 @@ MediaFetcher.prototype.get_user = function (id) {
   url += '/media/recent';
   url += '?client_id='  + this.client_id;
 
-  console.log(url);
-
   request.get(url, this.request_media_handler);
 };
 
@@ -60,8 +58,6 @@ MediaFetcher.prototype.get_location = function (id) {
   url += '/media/recent';
   url += '?client_id='  + this.client_id;
 
-  console.log(url);
-
   request.get(url, this.request_media_handler);
 };
 
@@ -71,8 +67,6 @@ MediaFetcher.prototype.get_geography = function (lat, lng, rad) {
   url += '?lat=' + lat;
   url += '&lng=' + lng;
   url += '&distance=' + rad;
-
-  console.log(url);
 
   request.get(url, self.request_media_handler);
 };
