@@ -17,3 +17,8 @@ node_modules
 Procfile
 secrets.json
 *.swp
+
+.git*
+docs/
+examples/
+test/

@@ -1,16 +1,16 @@
 {
   "name": "instagram-realtime",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Event-driven, Object-oriented Instagram API Wrapper",
   "main": "libs/InstagramStream.js",
   "dependencies": {
     "connect": "x.x.x",
-    "request": "2.x.x",
-    "colors": "0.x.x"
+    "request": "2.x.x"
   },
   "devDependencies": {
     "mocha": "1.x.x",
     "express": "3.x.x",
+    "colors": "0.x.x",
     "socket.io": "0.9.x"
   },
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mattvvhat/instagram-realtime.git"
+    "url": "git://github.com/instagram-realtime/instagram-realtime.git"
   },
   "keywords": [
     "instagram",
