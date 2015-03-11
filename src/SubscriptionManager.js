@@ -1,5 +1,4 @@
 var request = require('request');
-var connect = require('connect');
 var url = require('url');
 
 /**
