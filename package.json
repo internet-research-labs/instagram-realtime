@@ -2,7 +2,7 @@
   "name": "instagram-realtime",
   "version": "0.0.5",
   "description": "Event-driven, Object-oriented Instagram API Wrapper",
-  "main": "libs/InstagramStream.js",
+  "main": "src/InstagramStream.js",
   "dependencies": {
     "express": ">=0.0.1",
     "request": ">=0.0.1",
