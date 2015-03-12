@@ -6,6 +6,7 @@ var request = require('request');
  */
 function MediaFetcher (params) {
   var self = this;
+  self.min_tag_id = 0;
   self.parent = params.parent;
   self.server = params.server;
   self.client_id      = params.client_id;
@@ -15,10 +16,14 @@ function MediaFetcher (params) {
   // Request Media Handler
   self.request_media_handler = function (error, resp, body) {
     if (resp.statusCode === 200) {
-      self.parent.emit('new', resp, body);
-      self.parent.last.response = resp;
-      self.parent.last.body     = body;
-      self.parent.last_body     = body;
+      body = JSON.parse(body);
+      if(body.pagination.min_tag_id && body.pagination.min_tag_id > self.min_tag_id) {
+        self.min_tag_id = body.pagination.min_tag_id;
+        self.parent.emit('new', resp, body);
+        self.parent.last.response = resp;
+        self.parent.last.body     = body;
+        self.parent.last_body     = body;
+      }
     }
     else {
       self.parent.emit('new/error', resp, body);
@@ -48,7 +53,8 @@ MediaFetcher.prototype.get_tag = function (tag) {
   url += '/tags/' + tag;
   url += '/media/recent';
   url += '?client_id='  + this.client_id;
-
+  url += '&min_tag_id=' + this.min_tag_id;
+  console.log(url);
   request.get(url, this.request_media_handler);
 };
 
