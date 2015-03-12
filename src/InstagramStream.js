@@ -87,6 +87,9 @@ function InstagramStream (server, opts) {
     chain.use(bodyParser.urlencoded({extended: true}));
 
     chain.use(function (req, resp, next) {
+      console.log("incoming request");
+      console.log(req);
+      console.log(req.params);
       var pathname = url.parse(req.url).pathname;
       if (req.method === 'GET' && pathname === '/' + self.callback_path) {
         var hub_challenge = url.parse(req.url, true).query['hub.challenge'];
