@@ -99,7 +99,6 @@ function InstagramStream (server, opts) {
         //console.log("callback");
         //console.log(req.body);
         //console.log(req);
-        resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
         resp.sendStatus(200);
         route_traffic(req.body, req);
       }
