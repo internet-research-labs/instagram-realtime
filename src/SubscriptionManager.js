@@ -14,6 +14,8 @@ function SubscriptionManager (params) {
   var self = this;
 
   this.subscribe_handler = function (error, resp, body) {
+    console.log("subscribe");
+    console.log(body);
     if (resp.statusCode === 200) {
       self.parent.emit('subscribe', resp, body);
     }
@@ -23,6 +25,8 @@ function SubscriptionManager (params) {
   };
 
   this.unsubscribe_handler = function (error, resp, body) {
+    console.log("unsubscribe");
+    console.log(body);
     if (resp.statusCode === 200) {
       self.parent.emit('unsubscribe', resp, body);
     }

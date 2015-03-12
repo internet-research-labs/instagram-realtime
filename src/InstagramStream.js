@@ -96,6 +96,7 @@ function InstagramStream (server, opts) {
       else if (req.method === 'POST' && pathname === '/' + self.callback_path) {
         resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
         resp.end('🍕');
+        console.log(req.body);
         route_traffic(req.body, req);
       }
       else {
