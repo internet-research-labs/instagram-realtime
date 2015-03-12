@@ -87,10 +87,8 @@ function InstagramStream (server, opts) {
     chain.use(bodyParser.urlencoded({extended: true}));
 
     chain.use(function (req, resp, next) {
-      console.log("incoming request");
-      console.log(req);
-      console.log(req.params);
       var pathname = url.parse(req.url).pathname;
+      console.log("incoming request " + req.method + " " + pathname);
       if (req.method === 'GET' && pathname === '/' + self.callback_path) {
         var hub_challenge = url.parse(req.url, true).query['hub.challenge'];
         resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
@@ -99,7 +97,6 @@ function InstagramStream (server, opts) {
       else if (req.method === 'POST' && pathname === '/' + self.callback_path) {
         resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
         resp.end('🍕');
-        console.log(req.body);
         route_traffic(req.body, req);
       }
       else {
