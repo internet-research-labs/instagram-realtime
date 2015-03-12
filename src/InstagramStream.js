@@ -100,7 +100,7 @@ function InstagramStream (server, opts) {
         //console.log(req.body);
         //console.log(req);
         resp.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
-        resp.end('🍕');
+        resp.sendStatus(200);
         route_traffic(req.body, req);
       }
       else {
