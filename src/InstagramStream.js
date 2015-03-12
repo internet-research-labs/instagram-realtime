@@ -148,6 +148,7 @@ function InstagramStream (server, opts) {
    * subscription was sent, and what its purpose was.
    */
   function route_traffic (body) {
+    console.log(body);
     for (var k = 0; k < body.length; k++) {
       route_individual_media_response(body[k]);
     }
